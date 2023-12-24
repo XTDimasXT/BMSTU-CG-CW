@@ -12,7 +12,8 @@ void MyOpenGLWidget::draw_faces()
         for (size_t j = 0; j < num_points; ++j) 
         {
             int vertex_index = current_face[j] - 1;
-            glVertex3f(image.points_.array_points_[vertex_index].x_,
+            glVertex3f(image.points_.
+            array_points_[vertex_index].x_,
             image.points_.array_points_[vertex_index].y_,
             image.points_.array_points_[vertex_index].z_);
         }

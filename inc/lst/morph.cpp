@@ -14,9 +14,10 @@ void MyOpenGLWidget::Morph(FigureFacade &figure, FigureFacade &image)
 
     if (count == image.points_.array_points_.size())
     {
-        for (size_t i = count; i < figure.points_.array_points_.size(); ++i) {
-        image.points_.array_points_.push_back(image.points_.array_points_[i -
-        count]);
+        for (size_t i = count; i < figure.points_.array_points_.size(); ++i) 
+        {
+            image.points_.array_points_.
+            push_back(image.points_.array_points_[i - count]);
         }
         count = figure.points_.array_points_.size();
     } 
@@ -24,7 +25,8 @@ void MyOpenGLWidget::Morph(FigureFacade &figure, FigureFacade &image)
     {
         size_t imageSize = image.points_.array_points_.size();
         for (size_t i = count; i < imageSize; ++i)
-            image.points_.array_points_.erase(image.points_.array_points_.begin() + i);
+            image.points_.array_points_.
+            erase(image.points_.array_points_.begin() + i);
     }
     std::vector<Point> steps(count);
 
