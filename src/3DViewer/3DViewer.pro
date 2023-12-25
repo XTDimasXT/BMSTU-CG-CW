@@ -16,6 +16,7 @@ SOURCES += main.cc \
     model/point.cc \
     model/points.cc \
     model/faces.cc \
+    model/normals.cc \
 
 HEADERS += controller/controller.h \
     view/myopenglwidget.h \
@@ -27,7 +28,8 @@ HEADERS += controller/controller.h \
     model/faces.h \
     model/errors.h \
     model/action_data.h \
-    model/factoryMethod.h
+    model/factoryMethod.h \
+    model/normals.h \
 
 FORMS += \
     view/view.ui \

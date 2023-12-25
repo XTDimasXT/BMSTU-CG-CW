@@ -36,8 +36,10 @@ MainWindow::MainWindow(QWidget *parent)
   connect(this, SIGNAL(move_changed()), ui->picture, SLOT(redraw()));
   connect(this, SIGNAL(camera_changed(int, char)), ui->picture, SLOT(camera_changed(int, char)));
   connect(this, SIGNAL(light_changed(int, char)), ui->picture, SLOT(light_changed(int, char)));
+  connect(this, SIGNAL(clear_scene()), ui->picture, SLOT(clear_scene()));
   connect(ui->picture, SIGNAL(model_information(FigureFacade &)), this,
           SLOT(model_information(FigureFacade &)));
+
 
   edges_width = 1.0;
   vertices_width = 1.0;
@@ -217,6 +219,7 @@ void MainWindow::to_default()
     emit camera_changed(0, 'x');
     ui->MoveYCamera->setValue(50);
     emit camera_changed(0, 'y');
+    ui->horizontalSlider->setValue(50);
     ui->MoveZLight->setValue(50);
     emit light_changed(0, 'x');
     ui->MoveXLight->setValue(50);
@@ -513,4 +516,35 @@ void MainWindow::on_MoveZLight_sliderMoved(int position)
 {
     emit light_changed(position - 50, 'z');
 }
+
+
+void MainWindow::on_horizontalSlider_valueChanged(int value)
+{
+    double sc = scale;
+    if (value > 50) {
+     sc += (value - 46) * 0.2;
+    } else if (value == 50) {
+      sc += 1;
+    } else {
+      sc += value / 50.0;
+    }
+    ui->picture->copy_image(ui->picture->get_figure(), ui->picture->get_image());
+    Scale scale_tmp = {.kx = sc,
+                       .ky = sc,
+                       .kz = sc};
+    ui->picture->get_image().ScaleFigure(scale_tmp);
+
+    emit scale_changed();
+
+    turn_prev();
+    move_prev();
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    to_default();
+    emit clear_scene();
+}
+
 

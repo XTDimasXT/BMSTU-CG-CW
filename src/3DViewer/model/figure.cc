@@ -1,4 +1,6 @@
 #include "figure.h"
+#include <QDebug>
+#include <QString>
 
 void FigureFacade::DownloadFigure(const std::string& filename,
                                   ConcreteFigureBuilder& builder) {
@@ -37,6 +39,9 @@ void FigureFacade::ReadFigure(std::ifstream& fin, FigureBuilder& builder) {
   FacesCreator facesCreator;
   Faces* faces = (Faces*)facesCreator.Create();
 
+  NormalsCreator normalsCreator;
+  Normals* normals = (Normals*)normalsCreator.Create();
+
   while (std::getline(fin, line)) {
     if (line.substr(0, 2) == "v ") {
       Point vertex;
@@ -46,16 +51,27 @@ void FigureFacade::ReadFigure(std::ifstream& fin, FigureBuilder& builder) {
       Face face;
       ReadFace(face, line);
       faces->AppendFace(face);
+    } else if (line.substr(0,3) == "vn ") {
+        Normal normal;
+        ReadNormal(normal, line);
+        normals->AppendNormal(normal);
     }
   }
   builder.buildFaces(*faces);
   builder.buildPoints(*points);
+  builder.buildNormals(*normals);
   builder.buildPointsTable();
 
   for (size_t i = 0; i < faces->array_faces_.size(); ++i) {
     FaceToEdges(faces->array_faces_[i], *edges);
   }
   builder.buildEdges(*edges);
+}
+
+void FigureFacade::ReadNormal(Normal& normal, const std::string& line) {
+    std::istringstream iss(line);
+    std::string v;
+    iss >> v >> normal.x_ >> normal.y_ >> normal.z_;
 }
 
 void FigureFacade::ReadVertex(Point& point, const std::string& line) {
@@ -71,8 +87,18 @@ void FigureFacade::ReadFace(Face& face, const std::string& line) {
   while (iss >> token) {
     if (num_tokens > 0) {
       int point_index;
-      std::istringstream(token) >> point_index;
+      char tmp;
+      int tmpI;
+      int normal_index;
+
+      if (token.find("//") != std::string::npos) {
+        std::istringstream(token) >> point_index >> tmp >> tmp >> normal_index;
+      } else {
+        std::istringstream(token) >> point_index >> tmp >> tmpI >> tmp >> normal_index;
+      }
+
       face.points.push_back(point_index);
+      face.normal = normal_index;
     }
     num_tokens++;
   }

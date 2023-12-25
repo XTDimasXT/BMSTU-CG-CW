@@ -25,6 +25,8 @@ FigureFacade &MyOpenGLWidget::get_image() { return image; }
 void MyOpenGLWidget::initializeGL() {
     initializeOpenGLFunctions();
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glShadeModel(GL_SMOOTH);                // закраска Гуро
@@ -123,16 +125,16 @@ void MyOpenGLWidget::Morph(FigureFacade &figure, FigureFacade &image)
     MORPH = false;
 
 /*
-    qDebug() << image.points_.array_points_.size() << image.edges_.array_edges_.size();
+
     while (transformTime)
     {
         MorphNextStep(image, steps);
         --transformTime;
     }
     qint64 res =  tm.elapsed();
-    qDebug() << res << '\n';
+    qDebug() << image.points_.array_points_.size() << image.edges_.array_edges_.size() << res << '\n';
+*/
 
-    */
 }
 
 
@@ -267,23 +269,30 @@ void MyOpenGLWidget::draw_vertices() {
 }
 
 void MyOpenGLWidget::draw_faces() {
-  glColor3f(edges_color.redF(), edges_color.greenF(), edges_color.blueF());
-  glLineWidth(edges_width);
-
   for (size_t i = 0; i < image.faces_.array_faces_.size(); ++i) {
     const auto& current_face = image.faces_.array_faces_[i].points;
     size_t num_points = current_face.size();
 
     glBegin(num_points == 3 ? GL_TRIANGLES : GL_POLYGON);
 
-    for (size_t j = 0; j < num_points; ++j) {
-      int vertex_index = current_face[j] - 1;
-      glVertex3f(image.points_.array_points_[vertex_index].x_,
-                 image.points_.array_points_[vertex_index].y_,
-                 image.points_.array_points_[vertex_index].z_);
-    }
+    for (size_t i = 0; i < image.faces_.array_faces_.size(); ++i) {
+        const auto& current_face = image.faces_.array_faces_[i].points;
+        size_t num_points = current_face.size();
 
-    glEnd();
+        glBegin(num_points == 3 ? GL_TRIANGLES : GL_POLYGON);
+        Normal normal = image.normals_.array_normals_[image.faces_.array_faces_[i].normal - 1];
+
+        for (size_t j = 0; j < num_points; ++j) {
+            int vertex_index = current_face[j] - 1;
+
+            glNormal3f(normal.x_, normal.y_, normal.z_);
+            glVertex3f(image.points_.array_points_[vertex_index].x_,
+                       image.points_.array_points_[vertex_index].y_,
+                       image.points_.array_points_[vertex_index].z_);
+        }
+
+        glEnd();
+    }
   }
 }
 
@@ -357,6 +366,12 @@ void MyOpenGLWidget::light_changed(int pos, char type)
     update();
 }
 
+void MyOpenGLWidget::clear_scene()
+{
+    OK = false;
+    update();
+}
+
 int MyOpenGLWidget::init_image(FigureFacade &src, FigureFacade &dst) {
   copy_image(src, dst);
   return EXIT_SUCCESS;
@@ -368,13 +383,17 @@ void MyOpenGLWidget::copy_image(FigureFacade &src, FigureFacade &dst) {
   dst.edges_.array_edges_ = src.edges_.array_edges_;
   dst.points_.points_table_ = src.points_.points_table_;
   dst.center_ = src.center_;
+  dst.normals_ = src.normals_;
 }
+
+
 
 void MyOpenGLWidget::image_default() {
   image.points_.array_points_.clear();
   image.edges_.array_edges_.clear();
   image.points_.points_table_.clear();
   image.faces_.array_faces_.clear();
+  image.normals_.array_normals_.clear();
   image.center_.x_ = 0;
   image.center_.y_ = 0;
   image.center_.z_ = 0;
@@ -385,6 +404,7 @@ void MyOpenGLWidget::figure_default() {
   figure.edges_.array_edges_.clear();
   figure.points_.points_table_.clear();
   figure.faces_.array_faces_.clear();
+  figure.normals_.array_normals_.clear();
   figure.center_.x_ = 0;
   figure.center_.y_ = 0;
   figure.center_.z_ = 0;

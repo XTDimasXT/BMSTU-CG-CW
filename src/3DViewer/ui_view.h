@@ -1,3 +1,11 @@
+/********************************************************************************
+** Form generated from reading UI file 'view.ui'
+**
+** Created by: Qt User Interface Compiler version 6.2.4
+**
+** WARNING! All changes made in this file will be lost when recompiling UI file!
+********************************************************************************/
+
 #ifndef UI_VIEW_H
 #define UI_VIEW_H
 
@@ -13,6 +21,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
@@ -68,19 +77,22 @@ public:
     QComboBox *box_edges_type;
     QGroupBox *gridGroupBox1;
     QGridLayout *gridLayout;
-    QLabel *label_18;
-    QSlider *MoveZLight;
-    QLabel *label_16;
-    QSlider *MoveXCamera;
-    QSlider *MoveXLight;
-    QLabel *label_20;
-    QLabel *label_23;
-    QLabel *label_21;
     QLabel *label_15;
     QLabel *label_17;
-    QSlider *MoveYCamera;
-    QLabel *label_22;
     QSlider *MoveYLight;
+    QLabel *label_22;
+    QLabel *label_21;
+    QSlider *MoveYCamera;
+    QLabel *label_20;
+    QLabel *label_16;
+    QSlider *MoveXCamera;
+    QLabel *label_23;
+    QLabel *label_18;
+    QSlider *MoveZLight;
+    QSlider *MoveXLight;
+    QLabel *label_8;
+    QSlider *horizontalSlider;
+    QPushButton *pushButton;
     MyOpenGLWidget *picture;
     QMenuBar *menubar;
     QMenu *menuMenu;
@@ -339,17 +351,44 @@ public:
         gridGroupBox1->setSizePolicy(sizePolicy2);
         gridLayout = new QGridLayout(gridGroupBox1);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        label_18 = new QLabel(gridGroupBox1);
-        label_18->setObjectName(QString::fromUtf8("label_18"));
+        label_15 = new QLabel(gridGroupBox1);
+        label_15->setObjectName(QString::fromUtf8("label_15"));
 
-        gridLayout->addWidget(label_18, 2, 0, 1, 1);
+        gridLayout->addWidget(label_15, 0, 1, 1, 1);
 
-        MoveZLight = new QSlider(gridGroupBox1);
-        MoveZLight->setObjectName(QString::fromUtf8("MoveZLight"));
-        MoveZLight->setSliderPosition(50);
-        MoveZLight->setOrientation(Qt::Horizontal);
+        label_17 = new QLabel(gridGroupBox1);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
 
-        gridLayout->addWidget(MoveZLight, 6, 1, 1, 1);
+        gridLayout->addWidget(label_17, 1, 2, 1, 1);
+
+        MoveYLight = new QSlider(gridGroupBox1);
+        MoveYLight->setObjectName(QString::fromUtf8("MoveYLight"));
+        MoveYLight->setValue(50);
+        MoveYLight->setOrientation(Qt::Horizontal);
+
+        gridLayout->addWidget(MoveYLight, 6, 1, 1, 1);
+
+        label_22 = new QLabel(gridGroupBox1);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+
+        gridLayout->addWidget(label_22, 6, 0, 1, 1);
+
+        label_21 = new QLabel(gridGroupBox1);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+
+        gridLayout->addWidget(label_21, 5, 0, 1, 1);
+
+        MoveYCamera = new QSlider(gridGroupBox1);
+        MoveYCamera->setObjectName(QString::fromUtf8("MoveYCamera"));
+        MoveYCamera->setSliderPosition(50);
+        MoveYCamera->setOrientation(Qt::Horizontal);
+
+        gridLayout->addWidget(MoveYCamera, 2, 1, 1, 1);
+
+        label_20 = new QLabel(gridGroupBox1);
+        label_20->setObjectName(QString::fromUtf8("label_20"));
+
+        gridLayout->addWidget(label_20, 4, 1, 1, 1);
 
         label_16 = new QLabel(gridGroupBox1);
         label_16->setObjectName(QString::fromUtf8("label_16"));
@@ -363,59 +402,49 @@ public:
 
         gridLayout->addWidget(MoveXCamera, 1, 1, 1, 1);
 
+        label_23 = new QLabel(gridGroupBox1);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+
+        gridLayout->addWidget(label_23, 7, 0, 1, 1);
+
+        label_18 = new QLabel(gridGroupBox1);
+        label_18->setObjectName(QString::fromUtf8("label_18"));
+
+        gridLayout->addWidget(label_18, 2, 0, 1, 1);
+
+        MoveZLight = new QSlider(gridGroupBox1);
+        MoveZLight->setObjectName(QString::fromUtf8("MoveZLight"));
+        MoveZLight->setSliderPosition(50);
+        MoveZLight->setOrientation(Qt::Horizontal);
+
+        gridLayout->addWidget(MoveZLight, 7, 1, 1, 1);
+
         MoveXLight = new QSlider(gridGroupBox1);
         MoveXLight->setObjectName(QString::fromUtf8("MoveXLight"));
         MoveXLight->setValue(50);
         MoveXLight->setOrientation(Qt::Horizontal);
 
-        gridLayout->addWidget(MoveXLight, 4, 1, 1, 1);
+        gridLayout->addWidget(MoveXLight, 5, 1, 1, 1);
 
-        label_20 = new QLabel(gridGroupBox1);
-        label_20->setObjectName(QString::fromUtf8("label_20"));
+        label_8 = new QLabel(gridGroupBox1);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
 
-        gridLayout->addWidget(label_20, 3, 1, 1, 1);
+        gridLayout->addWidget(label_8, 3, 0, 1, 1);
 
-        label_23 = new QLabel(gridGroupBox1);
-        label_23->setObjectName(QString::fromUtf8("label_23"));
+        horizontalSlider = new QSlider(gridGroupBox1);
+        horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
+        horizontalSlider->setValue(50);
+        horizontalSlider->setOrientation(Qt::Horizontal);
 
-        gridLayout->addWidget(label_23, 6, 0, 1, 1);
-
-        label_21 = new QLabel(gridGroupBox1);
-        label_21->setObjectName(QString::fromUtf8("label_21"));
-
-        gridLayout->addWidget(label_21, 4, 0, 1, 1);
-
-        label_15 = new QLabel(gridGroupBox1);
-        label_15->setObjectName(QString::fromUtf8("label_15"));
-
-        gridLayout->addWidget(label_15, 0, 1, 1, 1);
-
-        label_17 = new QLabel(gridGroupBox1);
-        label_17->setObjectName(QString::fromUtf8("label_17"));
-
-        gridLayout->addWidget(label_17, 1, 2, 1, 1);
-
-        MoveYCamera = new QSlider(gridGroupBox1);
-        MoveYCamera->setObjectName(QString::fromUtf8("MoveYCamera"));
-        MoveYCamera->setSliderPosition(50);
-        MoveYCamera->setOrientation(Qt::Horizontal);
-
-        gridLayout->addWidget(MoveYCamera, 2, 1, 1, 1);
-
-        label_22 = new QLabel(gridGroupBox1);
-        label_22->setObjectName(QString::fromUtf8("label_22"));
-
-        gridLayout->addWidget(label_22, 5, 0, 1, 1);
-
-        MoveYLight = new QSlider(gridGroupBox1);
-        MoveYLight->setObjectName(QString::fromUtf8("MoveYLight"));
-        MoveYLight->setValue(50);
-        MoveYLight->setOrientation(Qt::Horizontal);
-
-        gridLayout->addWidget(MoveYLight, 5, 1, 1, 1);
+        gridLayout->addWidget(horizontalSlider, 3, 1, 1, 1);
 
 
         verticalLayout->addWidget(gridGroupBox1);
+
+        pushButton = new QPushButton(verticalGroupBox);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        verticalLayout->addWidget(pushButton);
 
 
         horizontalLayout->addWidget(verticalGroupBox);
@@ -474,14 +503,16 @@ public:
         box_edges_type->setItemText(0, QCoreApplication::translate("MainWindow", "Solid", nullptr));
         box_edges_type->setItemText(1, QCoreApplication::translate("MainWindow", "Dotted", nullptr));
 
-        label_18->setText(QCoreApplication::translate("MainWindow", "Move y", nullptr));
-        label_16->setText(QCoreApplication::translate("MainWindow", "Move x", nullptr));
-        label_20->setText(QCoreApplication::translate("MainWindow", "Light", nullptr));
-        label_23->setText(QCoreApplication::translate("MainWindow", "Move z", nullptr));
-        label_21->setText(QCoreApplication::translate("MainWindow", "Move x", nullptr));
         label_15->setText(QCoreApplication::translate("MainWindow", "Camera", nullptr));
         label_17->setText(QString());
         label_22->setText(QCoreApplication::translate("MainWindow", "Move y", nullptr));
+        label_21->setText(QCoreApplication::translate("MainWindow", "Move x", nullptr));
+        label_20->setText(QCoreApplication::translate("MainWindow", "Light", nullptr));
+        label_16->setText(QCoreApplication::translate("MainWindow", "Move x", nullptr));
+        label_23->setText(QCoreApplication::translate("MainWindow", "Move z", nullptr));
+        label_18->setText(QCoreApplication::translate("MainWindow", "Move y", nullptr));
+        label_8->setText(QCoreApplication::translate("MainWindow", "Move z", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "Clear scene", nullptr));
         menuMenu->setTitle(QCoreApplication::translate("MainWindow", "Menu", nullptr));
     } // retranslateUi
 

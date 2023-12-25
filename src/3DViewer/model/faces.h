@@ -6,6 +6,7 @@
 
 struct Face {
   std::vector<int> points;
+  int normal;
 };
 
 class Faces : public Product {

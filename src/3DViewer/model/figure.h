@@ -6,6 +6,7 @@
 #include "factoryMethod.h"
 #include "figureBuilder.h"
 #include "points.h"
+#include "normals.h"
 
 class ConcreteFigureBuilder;
 
@@ -24,10 +25,12 @@ class FigureFacade : Product {
   Points points_;
   Edges edges_;
   Faces faces_;
+  Normals normals_;
 
   void ReadFigure(std::ifstream& fin, FigureBuilder& builder);
   void ReadVertex(Point& point, const std::string& line);
   void ReadFace(Face& face, const std::string& line);
+  void ReadNormal(Normal& normal, const std::string& line);
   void FaceToEdges(const Face& face, Edges& edges);
   bool ExistEdge(const Edge& edge);
 };
@@ -44,6 +47,8 @@ class ConcreteFigureBuilder : public FigureBuilder {
   void buildEdges(const Edges& edges) override { figure.edges_ = edges; }
 
   void buildFaces(const Faces& faces) override { figure.faces_ = faces; }
+
+  void buildNormals(const Normals& normals) override { figure.normals_ = normals; }
 
   void buildPointsTable() override {
     for (size_t i = 0; i < figure.edges_.array_edges_.size(); ++i) {

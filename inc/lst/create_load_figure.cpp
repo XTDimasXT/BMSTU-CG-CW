@@ -8,8 +8,7 @@ void FigureFacade::DownloadFigure(const std::string& filename, ConcreteFigureBui
     }
 }
 
-void FigureFacade::ReadFigure(std::ifstream& fin, FigureBuilder& builder) 
-{
+void FigureFacade::ReadFigure(std::ifstream& fin, FigureBuilder& builder) {
     std::string line;
 
     EdgesCreator edgesCreator;
@@ -21,26 +20,31 @@ void FigureFacade::ReadFigure(std::ifstream& fin, FigureBuilder& builder)
     FacesCreator facesCreator;
     Faces* faces = (Faces*)facesCreator.Create();
 
-    while (std::getline(fin, line)) 
-    {
-        if (line.substr(0, 2) == "v ") 
-        {
-            Point vertex;
-            ReadVertex(vertex, line);
-            points->AppendPoint(vertex);
-        } 
-        else if (line.substr(0, 2) == "f ") 
-        {
-            Face face;
-            ReadFace(face, line);
-            faces->AppendFace(face);
+    NormalsCreator normalsCreator;
+    Normals* normals = (Normals*)normalsCreator.Create();
+
+    while (std::getline(fin, line)) {
+        if (line.substr(0, 2) == "v ") {
+        Point vertex;
+        ReadVertex(vertex, line);
+        points->AppendPoint(vertex);
+        } else if (line.substr(0, 2) == "f ") {
+        Face face;
+        ReadFace(face, line);
+        faces->AppendFace(face);
+        } else if (line.substr(0,3) == "vn ") {
+            Normal normal;
+            ReadNormal(normal, line);
+            normals->AppendNormal(normal);
         }
     }
     builder.buildFaces(*faces);
     builder.buildPoints(*points);
+    builder.buildNormals(*normals);
     builder.buildPointsTable();
 
-    for (size_t i = 0; i < faces->array_faces_.size(); ++i) 
+    for (size_t i = 0; i < faces->array_faces_.size(); ++i) {
         FaceToEdges(faces->array_faces_[i], *edges);
+    }
     builder.buildEdges(*edges);
 }

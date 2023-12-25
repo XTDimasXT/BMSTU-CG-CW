@@ -38,6 +38,7 @@ class MyOpenGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void redraw();
   void camera_changed(int pos, char type);
   void light_changed(int pos, char type);
+  void clear_scene();
 
  protected:
   void initializeGL() override;

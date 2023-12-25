@@ -1,6 +1,7 @@
 #pragma once
 
 #include "figure.h"
+#include "normals.h"
 
 class FigureBuilder {
  public:
@@ -9,5 +10,6 @@ class FigureBuilder {
   virtual void buildPoints(const Points& points) = 0;
   virtual void buildEdges(const Edges& edges) = 0;
   virtual void buildFaces(const Faces& faces) = 0;
+  virtual void buildNormals(const Normals& normals) = 0;
   virtual void buildPointsTable() = 0;
 };

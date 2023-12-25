@@ -59,6 +59,8 @@ class MainWindow : public QMainWindow {
   void on_MoveXLight_sliderMoved(int position);
   void on_MoveYLight_sliderMoved(int position);
   void on_MoveZLight_sliderMoved(int position);
+  void on_horizontalSlider_valueChanged(int value);
+  void on_pushButton_clicked();
 
 private:
   Ui::MainWindow *ui;
@@ -104,5 +106,6 @@ private:
   void move_changed();
   void camera_changed(int pos, char type);
   void light_changed(int pos, char type);
+  void clear_scene();
 };
 #endif  // MAINWINDOW_H
