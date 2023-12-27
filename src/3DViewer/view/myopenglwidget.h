@@ -13,6 +13,7 @@
 #include "controller.h"
 #include "figure.h"
 
+
 class MyOpenGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   Q_OBJECT
  public:
@@ -39,6 +40,7 @@ class MyOpenGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void camera_changed(int pos, char type);
   void light_changed(int pos, char type);
   void clear_scene();
+  void color_changed(int color);
 
  protected:
   void initializeGL() override;
@@ -51,6 +53,7 @@ class MyOpenGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   QColor background_color;
   QColor edges_color;
   QColor vertices_color;
+  QColor color_;
 
   float vertices_width;
   float edges_width;

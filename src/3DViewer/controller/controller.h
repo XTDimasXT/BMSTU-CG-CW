@@ -11,6 +11,15 @@
 
 #define BLACK 0, 0, 0
 #define WHITE 255, 255, 255
+#define GRAY 80, 80, 80
+#define RED 217, 85, 65
+#define ORANGE 217, 146, 65
+#define YELLOW 252, 244, 88
+#define GREEN 132, 222, 84
+#define BLUE 84, 210, 222
+#define PURPLE 171, 84, 222
+#define PINK 232, 130, 178
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -62,6 +71,8 @@ class MainWindow : public QMainWindow {
   void on_horizontalSlider_valueChanged(int value);
   void on_pushButton_clicked();
 
+  void on_comboBox_currentIndexChanged(int index);
+
 private:
   Ui::MainWindow *ui;
   QColor vertices_color;
@@ -85,10 +96,11 @@ private:
   double move_y;
   double move_z;
 
+  int color;
+
   void scale_prev();
   void move_prev();
   void turn_prev();
-
   void to_default();
 
  signals:
@@ -104,8 +116,10 @@ private:
   void scale_changed();
   void turn_changed();
   void move_changed();
+  void color_changed(int color);
   void camera_changed(int pos, char type);
   void light_changed(int pos, char type);
   void clear_scene();
+
 };
 #endif  // MAINWINDOW_H

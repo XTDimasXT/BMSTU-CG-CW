@@ -67,14 +67,16 @@ public:
     QSlider *moveZSlider;
     QGroupBox *gridGroupBox;
     QGridLayout *gridLayout_3;
-    QLabel *label_edges_width;
-    QSlider *slider_edges_width;
     QLabel *label_vertices_type;
     QLabel *label_vertices_width;
+    QComboBox *box_vertices_type;
+    QSlider *slider_edges_width;
     QSlider *slider_vertices_width;
     QLabel *label_edges_type;
-    QComboBox *box_vertices_type;
     QComboBox *box_edges_type;
+    QLabel *label_edges_width;
+    QLabel *label_9;
+    QComboBox *comboBox;
     QGroupBox *gridGroupBox1;
     QGridLayout *gridLayout;
     QLabel *label_15;
@@ -83,15 +85,15 @@ public:
     QLabel *label_22;
     QLabel *label_21;
     QSlider *MoveYCamera;
+    QSlider *horizontalSlider;
     QLabel *label_20;
     QLabel *label_16;
     QSlider *MoveXCamera;
     QLabel *label_23;
     QLabel *label_18;
+    QLabel *label_8;
     QSlider *MoveZLight;
     QSlider *MoveXLight;
-    QLabel *label_8;
-    QSlider *horizontalSlider;
     QPushButton *pushButton;
     MyOpenGLWidget *picture;
     QMenuBar *menubar;
@@ -135,8 +137,8 @@ public:
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         moveYSlider = new QSlider(gridGroupBox_2);
         moveYSlider->setObjectName(QString::fromUtf8("moveYSlider"));
-        moveYSlider->setMinimum(-200);
-        moveYSlider->setMaximum(200);
+        moveYSlider->setMinimum(-2000);
+        moveYSlider->setMaximum(2000);
         moveYSlider->setOrientation(Qt::Horizontal);
 
         gridLayout_2->addWidget(moveYSlider, 1, 1, 1, 1);
@@ -176,8 +178,9 @@ public:
 
         moveXSlider = new QSlider(gridGroupBox_2);
         moveXSlider->setObjectName(QString::fromUtf8("moveXSlider"));
-        moveXSlider->setMinimum(-200);
-        moveXSlider->setMaximum(200);
+        moveXSlider->setMinimum(-2000);
+        moveXSlider->setMaximum(2000);
+        moveXSlider->setPageStep(10);
         moveXSlider->setOrientation(Qt::Horizontal);
 
         gridLayout_2->addWidget(moveXSlider, 0, 1, 1, 1);
@@ -196,8 +199,8 @@ public:
 
         moveZBox = new QDoubleSpinBox(gridGroupBox_2);
         moveZBox->setObjectName(QString::fromUtf8("moveZBox"));
-        moveZBox->setMinimum(-2.000000000000000);
-        moveZBox->setMaximum(2.000000000000000);
+        moveZBox->setMinimum(-20.000000000000000);
+        moveZBox->setMaximum(20.000000000000000);
         moveZBox->setSingleStep(0.010000000000000);
 
         gridLayout_2->addWidget(moveZBox, 2, 2, 1, 1);
@@ -237,8 +240,8 @@ public:
 
         moveXBox = new QDoubleSpinBox(gridGroupBox_2);
         moveXBox->setObjectName(QString::fromUtf8("moveXBox"));
-        moveXBox->setMinimum(-2.000000000000000);
-        moveXBox->setMaximum(2.000000000000000);
+        moveXBox->setMinimum(-20.000000000000000);
+        moveXBox->setMaximum(20.000000000000000);
         moveXBox->setSingleStep(0.010000000000000);
 
         gridLayout_2->addWidget(moveXBox, 0, 2, 1, 1);
@@ -250,8 +253,8 @@ public:
 
         moveYBox = new QDoubleSpinBox(gridGroupBox_2);
         moveYBox->setObjectName(QString::fromUtf8("moveYBox"));
-        moveYBox->setMinimum(-2.000000000000000);
-        moveYBox->setMaximum(2.000000000000000);
+        moveYBox->setMinimum(-20.000000000000000);
+        moveYBox->setMaximum(20.000000000000000);
         moveYBox->setSingleStep(0.010000000000000);
 
         gridLayout_2->addWidget(moveYBox, 1, 2, 1, 1);
@@ -273,8 +276,8 @@ public:
 
         moveZSlider = new QSlider(gridGroupBox_2);
         moveZSlider->setObjectName(QString::fromUtf8("moveZSlider"));
-        moveZSlider->setMinimum(-200);
-        moveZSlider->setMaximum(200);
+        moveZSlider->setMinimum(-2000);
+        moveZSlider->setMaximum(2000);
         moveZSlider->setOrientation(Qt::Horizontal);
 
         gridLayout_2->addWidget(moveZSlider, 2, 1, 1, 1);
@@ -286,20 +289,6 @@ public:
         gridGroupBox->setObjectName(QString::fromUtf8("gridGroupBox"));
         gridLayout_3 = new QGridLayout(gridGroupBox);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        label_edges_width = new QLabel(gridGroupBox);
-        label_edges_width->setObjectName(QString::fromUtf8("label_edges_width"));
-
-        gridLayout_3->addWidget(label_edges_width, 1, 0, 1, 1);
-
-        slider_edges_width = new QSlider(gridGroupBox);
-        slider_edges_width->setObjectName(QString::fromUtf8("slider_edges_width"));
-        slider_edges_width->setMinimum(10);
-        slider_edges_width->setMaximum(250);
-        slider_edges_width->setValue(10);
-        slider_edges_width->setOrientation(Qt::Horizontal);
-
-        gridLayout_3->addWidget(slider_edges_width, 1, 1, 1, 1);
-
         label_vertices_type = new QLabel(gridGroupBox);
         label_vertices_type->setObjectName(QString::fromUtf8("label_vertices_type"));
 
@@ -309,6 +298,23 @@ public:
         label_vertices_width->setObjectName(QString::fromUtf8("label_vertices_width"));
 
         gridLayout_3->addWidget(label_vertices_width, 0, 0, 1, 1);
+
+        box_vertices_type = new QComboBox(gridGroupBox);
+        box_vertices_type->addItem(QString());
+        box_vertices_type->addItem(QString());
+        box_vertices_type->addItem(QString());
+        box_vertices_type->setObjectName(QString::fromUtf8("box_vertices_type"));
+
+        gridLayout_3->addWidget(box_vertices_type, 2, 1, 1, 1);
+
+        slider_edges_width = new QSlider(gridGroupBox);
+        slider_edges_width->setObjectName(QString::fromUtf8("slider_edges_width"));
+        slider_edges_width->setMinimum(10);
+        slider_edges_width->setMaximum(250);
+        slider_edges_width->setValue(10);
+        slider_edges_width->setOrientation(Qt::Horizontal);
+
+        gridLayout_3->addWidget(slider_edges_width, 1, 1, 1, 1);
 
         slider_vertices_width = new QSlider(gridGroupBox);
         slider_vertices_width->setObjectName(QString::fromUtf8("slider_vertices_width"));
@@ -324,20 +330,36 @@ public:
 
         gridLayout_3->addWidget(label_edges_type, 3, 0, 1, 1);
 
-        box_vertices_type = new QComboBox(gridGroupBox);
-        box_vertices_type->addItem(QString());
-        box_vertices_type->addItem(QString());
-        box_vertices_type->addItem(QString());
-        box_vertices_type->setObjectName(QString::fromUtf8("box_vertices_type"));
-
-        gridLayout_3->addWidget(box_vertices_type, 2, 1, 1, 1);
-
         box_edges_type = new QComboBox(gridGroupBox);
         box_edges_type->addItem(QString());
         box_edges_type->addItem(QString());
         box_edges_type->setObjectName(QString::fromUtf8("box_edges_type"));
 
         gridLayout_3->addWidget(box_edges_type, 3, 1, 1, 1);
+
+        label_edges_width = new QLabel(gridGroupBox);
+        label_edges_width->setObjectName(QString::fromUtf8("label_edges_width"));
+
+        gridLayout_3->addWidget(label_edges_width, 1, 0, 1, 1);
+
+        label_9 = new QLabel(gridGroupBox);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        gridLayout_3->addWidget(label_9, 4, 0, 1, 1);
+
+        comboBox = new QComboBox(gridGroupBox);
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+
+        gridLayout_3->addWidget(comboBox, 4, 1, 1, 1);
 
 
         verticalLayout->addWidget(gridGroupBox);
@@ -385,6 +407,13 @@ public:
 
         gridLayout->addWidget(MoveYCamera, 2, 1, 1, 1);
 
+        horizontalSlider = new QSlider(gridGroupBox1);
+        horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
+        horizontalSlider->setValue(50);
+        horizontalSlider->setOrientation(Qt::Horizontal);
+
+        gridLayout->addWidget(horizontalSlider, 3, 1, 1, 1);
+
         label_20 = new QLabel(gridGroupBox1);
         label_20->setObjectName(QString::fromUtf8("label_20"));
 
@@ -412,6 +441,11 @@ public:
 
         gridLayout->addWidget(label_18, 2, 0, 1, 1);
 
+        label_8 = new QLabel(gridGroupBox1);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        gridLayout->addWidget(label_8, 3, 0, 1, 1);
+
         MoveZLight = new QSlider(gridGroupBox1);
         MoveZLight->setObjectName(QString::fromUtf8("MoveZLight"));
         MoveZLight->setSliderPosition(50);
@@ -425,18 +459,6 @@ public:
         MoveXLight->setOrientation(Qt::Horizontal);
 
         gridLayout->addWidget(MoveXLight, 5, 1, 1, 1);
-
-        label_8 = new QLabel(gridGroupBox1);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
-
-        gridLayout->addWidget(label_8, 3, 0, 1, 1);
-
-        horizontalSlider = new QSlider(gridGroupBox1);
-        horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
-        horizontalSlider->setValue(50);
-        horizontalSlider->setOrientation(Qt::Horizontal);
-
-        gridLayout->addWidget(horizontalSlider, 3, 1, 1, 1);
 
 
         verticalLayout->addWidget(gridGroupBox1);
@@ -492,17 +514,29 @@ public:
         label_2->setText(QCoreApplication::translate("MainWindow", "Move y", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Move z", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Move x", nullptr));
-        label_edges_width->setText(QCoreApplication::translate("MainWindow", "Edges width", nullptr));
         label_vertices_type->setText(QCoreApplication::translate("MainWindow", "Vertices type", nullptr));
         label_vertices_width->setText(QCoreApplication::translate("MainWindow", "Vertices width", nullptr));
-        label_edges_type->setText(QCoreApplication::translate("MainWindow", "Edges type", nullptr));
         box_vertices_type->setItemText(0, QCoreApplication::translate("MainWindow", "None", nullptr));
         box_vertices_type->setItemText(1, QCoreApplication::translate("MainWindow", "Square", nullptr));
         box_vertices_type->setItemText(2, QCoreApplication::translate("MainWindow", "Circle", nullptr));
 
+        label_edges_type->setText(QCoreApplication::translate("MainWindow", "Edges type", nullptr));
         box_edges_type->setItemText(0, QCoreApplication::translate("MainWindow", "Solid", nullptr));
         box_edges_type->setItemText(1, QCoreApplication::translate("MainWindow", "Dotted", nullptr));
 
+        label_edges_width->setText(QCoreApplication::translate("MainWindow", "Edges width", nullptr));
+        label_9->setText(QCoreApplication::translate("MainWindow", "Color", nullptr));
+        comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "white", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "gray", nullptr));
+        comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "red", nullptr));
+        comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "orange", nullptr));
+        comboBox->setItemText(4, QCoreApplication::translate("MainWindow", "yellow", nullptr));
+        comboBox->setItemText(5, QCoreApplication::translate("MainWindow", "green", nullptr));
+        comboBox->setItemText(6, QCoreApplication::translate("MainWindow", "blue", nullptr));
+        comboBox->setItemText(7, QCoreApplication::translate("MainWindow", "purple", nullptr));
+        comboBox->setItemText(8, QCoreApplication::translate("MainWindow", "pink", nullptr));
+
+        comboBox->setCurrentText(QCoreApplication::translate("MainWindow", "gray", nullptr));
         label_15->setText(QCoreApplication::translate("MainWindow", "Camera", nullptr));
         label_17->setText(QString());
         label_22->setText(QCoreApplication::translate("MainWindow", "Move y", nullptr));

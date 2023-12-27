@@ -4,6 +4,20 @@
 #include <QElapsedTimer>
 #include <QCoreApplication>
 
+QColor color_from_index(int index) {
+  if (index == 0) return QColor::fromRgb(WHITE);
+  if (index == 1) return QColor::fromRgb(GRAY);
+  if (index == 2) return QColor::fromRgb(RED);
+  if (index == 3) return QColor::fromRgb(ORANGE);
+  if (index == 4) return QColor::fromRgb(YELLOW);
+  if (index == 5) return QColor::fromRgb(GREEN);
+  if (index == 6) return QColor::fromRgb(BLUE);
+  if (index == 7) return QColor::fromRgb(PURPLE);
+  if (index == 8) return QColor::fromRgb(PINK);
+
+  return QColor::fromRgb(0, 0, 0);
+}
+
 MyOpenGLWidget::MyOpenGLWidget(QWidget *parent) : QOpenGLWidget(parent) {
   OK = false;
   MORPH = false;
@@ -16,6 +30,7 @@ MyOpenGLWidget::MyOpenGLWidget(QWidget *parent) : QOpenGLWidget(parent) {
   cameraD[0] = 0;
   cameraD[1] = 0;
   cameraD[2] = 0;
+  color_ = color_from_index(1);
 }
 
 FigureFacade &MyOpenGLWidget::get_figure() { return figure; }
@@ -24,10 +39,10 @@ FigureFacade &MyOpenGLWidget::get_image() { return image; }
 
 void MyOpenGLWidget::initializeGL() {
     initializeOpenGLFunctions();
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
+    glEnable(GL_DEPTH_TEST);                // удаление невидимых линий
+    glEnable(GL_CULL_FACE);                 // выключение отрисовки задней поверхности граней
     glCullFace(GL_BACK);
-    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHTING);                  // cвет
     glEnable(GL_LIGHT0);
     glShadeModel(GL_SMOOTH);                // закраска Гуро
     glClearColor(background_color.redF(), background_color.greenF(), background_color.blueF(), 1.0f);
@@ -252,7 +267,8 @@ void MyOpenGLWidget::draw_edges() {
 
 void MyOpenGLWidget::draw_vertices() {
   if (vertex_type != NONE) {
-    if (vertex_type == CIRCLE) glEnable(GL_POINT_SMOOTH);
+    if (vertex_type == CIRCLE)
+        glEnable(GL_POINT_SMOOTH);
     glColor3f(vertices_color.redF(), vertices_color.greenF(),
               vertices_color.blueF());
     glPointSize(vertices_width);
@@ -274,6 +290,13 @@ void MyOpenGLWidget::draw_faces() {
     size_t num_points = current_face.size();
 
     glBegin(num_points == 3 ? GL_TRIANGLES : GL_POLYGON);
+    GLfloat material_color[] = {
+      color_.redF(),
+      color_.greenF(),
+      color_.blueF(),
+      1.0f
+    };
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, material_color);
 
     for (size_t i = 0; i < image.faces_.array_faces_.size(); ++i) {
         const auto& current_face = image.faces_.array_faces_[i].points;
@@ -369,6 +392,13 @@ void MyOpenGLWidget::light_changed(int pos, char type)
 void MyOpenGLWidget::clear_scene()
 {
     OK = false;
+    MORPH = false;
+    update();
+}
+
+void MyOpenGLWidget::color_changed(int color)
+{
+    color_ = color_from_index(color);
     update();
 }
 
@@ -385,8 +415,6 @@ void MyOpenGLWidget::copy_image(FigureFacade &src, FigureFacade &dst) {
   dst.center_ = src.center_;
   dst.normals_ = src.normals_;
 }
-
-
 
 void MyOpenGLWidget::image_default() {
   image.points_.array_points_.clear();

@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent)
   connect(this, SIGNAL(camera_changed(int, char)), ui->picture, SLOT(camera_changed(int, char)));
   connect(this, SIGNAL(light_changed(int, char)), ui->picture, SLOT(light_changed(int, char)));
   connect(this, SIGNAL(clear_scene()), ui->picture, SLOT(clear_scene()));
+  connect(this, SIGNAL(color_changed(int)), ui->picture, SLOT(color_changed(int)));
+
   connect(ui->picture, SIGNAL(model_information(FigureFacade &)), this,
           SLOT(model_information(FigureFacade &)));
 
@@ -547,4 +549,11 @@ void MainWindow::on_pushButton_clicked()
     emit clear_scene();
 }
 
+
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+    color = index;
+    emit color_changed(color);
+}
 
