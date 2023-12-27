@@ -8,7 +8,8 @@ void FigureFacade::DownloadFigure(const std::string& filename, ConcreteFigureBui
     }
 }
 
-void FigureFacade::ReadFigure(std::ifstream& fin, FigureBuilder& builder) {
+void FigureFacade::ReadFigure(std::ifstream& fin, FigureBuilder& builder) 
+{
     std::string line;
 
     EdgesCreator edgesCreator;
